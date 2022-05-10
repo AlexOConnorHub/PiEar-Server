@@ -60,24 +60,25 @@ namespace PiEar {
             std::cout << "PortAudio error: " << Pa_GetErrorText(err) << std::endl;
             throw std::runtime_error("PortAudio error closing stream");
         }
-        else std::cout << "PortAudio stream closed" << std::endl;
-        // Terminate PortAudio
-        Pa_Terminate();
-    }
 
-    int Audio::paCallback( const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void *userData ) {
-        /* Cast data passed through stream to our structure. */
-        paTestData *data = (paTestData*)userData;
-        float *out = (float*)outputBuffer;
-        (void) inputBuffer; /* Prevent unused variable warning. */
-        std::cout << "Size of input buffer: " << sizeof(inputBuffer) << std::endl;
-        std::cout << "Size of frames per buffer: " << framesPerBuffer << std::endl;
-        for(unsigned int i=0; i<framesPerBuffer; i++ )
-        {
-            // TODO: add audio processing here
-            // Add audio to queue
+else std::cout << "PortAudio stream closed" << std::endl;
+// Terminate PortAudio
+Pa_Terminate();
+}
+
+int Audio::paCallback( const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void *userData ) {
+    /* Cast data passed through stream to our structure. */
+    paTestData *data = (paTestData*)userData;
+    float *out = (float*)outputBuffer;
+    (void) inputBuffer; /* Prevent unused variable warning. */
+    std::cout << "Size of input buffer: " << sizeof(inputBuffer) << std::endl;
+    std::cout << "Size of frames per buffer: " << framesPerBuffer << std::endl;
+    for(unsigned int i=0; i<framesPerBuffer; i++ )
+    {
+        // TODO: add audio processing here
+        // Add audio to queue
 //            audioQueue.push(out[i]);
-        }
-        return 0;
     }
+    return 0;
+}
 }
